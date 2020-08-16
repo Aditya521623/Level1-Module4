@@ -27,6 +27,7 @@ public class SimonSays extends KeyAdapter {
 	private int tries = 0;
 	private boolean simonSays = false;
 	Date timeAtStart;
+	int points = 0;
 
 	// Complete steps 1 - 7 before you test
 	// 1. Declare a JFrame variable
@@ -42,7 +43,8 @@ public class SimonSays extends KeyAdapter {
 		// key when
 		// 'Simon says' otherwise press a different key"
 		JOptionPane.showMessageDialog(null,
-				"the rules are simple, when simon says to press a specfic arrow on your keyboard, press the corresponding button. If there is no simon says, then press a button which is not what is aksed. ");
+				"The rules are simple, when simon says to press a specfic arrow on your keyboard, press the corresponding button. If there is no simon says, then press a button which is not what is aksed. ");
+		timeAtStart=new Date();
 
 		// 4. Call the showImage method to show an image
 		showImage();
@@ -51,29 +53,38 @@ public class SimonSays extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
-		int points = 0;
 
-		if (e.getKeyCode() == imageIndex && simonSays == true) {
-			points += 1;
-			speak("correct!");
+		if (simonSays) {
+			if (e.getKeyCode() == imageIndex) {
+				speak("Correct!");
+				points += 1;
+			} else if (e.getKeyCode() != imageIndex) {
+				speak("Simon didnt say to do that.");
+			}
+		} else {
+			if (e.getKeyCode() != imageIndex) {
+				speak("Correct!");
+				points += 1;
 
-		} else if (e.getKeyCode() != imageIndex && simonSays == false) {
-			speak("Simon didnt say to do that");
+			} else if (e.getKeyCode() == imageIndex) {
+				speak("Simon didn’t say to do that.");
+			}
 		}
-		tries += 1;
-		frame.dispose();
 
-		showImage();
+		tries += 1;
 
 		if (tries >= 9) {
+			Date timeAtEnd= new Date();
 			speak("your score was " + points);
+			System.out.println((timeAtEnd.getTime()-timeAtStart.getTime())/1000);
+			System.exit(0);
+			
 
 		}
-		
+
 		frame.dispose();
-		
+
 		showImage();
-		
 
 		// 16. If the keyCode matches the imageIndex and "Simon says"
 
