@@ -56,6 +56,7 @@ public class Jeopardy implements ActionListener {
 		// 3. Create a JPanel variable to hold the header using the createHeader method
 		JPanel panel= new JPanel();
 		panel=createHeader("History");
+		panel=createHeader("Math");
 	
 		
 		// 4. Add the header component to the quizPanel
@@ -65,7 +66,11 @@ public class Jeopardy implements ActionListener {
 		frame.add(quizPanel);
 
 		// 6. Use the createButton method to set the value of firstButton
-		firstButton=createButton("$100");
+		firstButton=createButton("$200");
+		secondButton=createButton("$400");
+		
+		thirdButton=createButton("200");
+		fourthButton=createButton("400");
 
 		// 7. Add the firstButton to the quizPanel
 		quizPanel.add(firstButton);
@@ -76,10 +81,18 @@ public class Jeopardy implements ActionListener {
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
 
+
 		// 10. Add the secondButton to the quizPanel
+		quizPanel.add(firstButton);
+		quizPanel.add(secondButton);
+		quizPanel.add(thirdButton);
+		quizPanel.add(fourthButton);
 
 		// 11. Add action listeners to the buttons (2 lines of code)
-
+		firstButton.addActionListener(this);
+		secondButton.addActionListener(this);
+		thirdButton.addActionListener(this);
+		fourthButton.addActionListener(this);
 		// 12. Write the code to complete the actionPerformed() method below
 
 		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
@@ -120,12 +133,19 @@ return button;
 
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
-
+if (buttonPressed==firstButton) {
+	askQuestion("Who sailed the ocean blue in 1492?", "christopher columbus", 200);
+}
 			// Call the askQuestion() method
+
  
 		// Complete the code in the askQuestion() method. When you play the game, the score should change.
 
 		// If the buttonPressed was the secondButton
+else if (buttonPressed==secondButton) {
+	askQuestion("What is the name of the first dictator in the roman empire?", "julias caesers", 400);
+}
+
 
 			// Call the askQuestion() method with a harder question
 
@@ -136,13 +156,27 @@ return button;
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		
 		// Use the playJeopardyTheme() method to play music while the use thinks of an answer
-		
+		playJeopardyTheme();
 		// Remove this temporary message and replace it with a pop-up that asks the user the question
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+	String answer=JOptionPane.showInputDialog(question);
+	
+	sound.stop();
 		
 		// Stop the theme music when they have entered their response. Hint: use the sound variable 
 		
 		// If the answer is correct
+	if (answer.equalsIgnoreCase(correctAnswer)) {
+		JOptionPane.showMessageDialog(null, ("Correct! The answer was "+correctAnswer));
+		score+=prizeMoney;
+	
+		
+	}
+	else {
+JOptionPane.showMessageDialog(null,("Wrong, the answer was "+ correctAnswer));
+		score-=prizeMoney;
+	}
+	
+	updateScore();
 
 			// Increase the score by the prizeMoney
 
