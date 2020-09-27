@@ -53,6 +53,7 @@ public class calc implements ActionListener {
 			 frame.add(panel);
 			
 			 frame.setVisible(true);
+			 frame.pack();
 			 
 		 }
 		@Override
@@ -60,15 +61,24 @@ public class calc implements ActionListener {
 			JButton buttonClicked = (JButton) e.getSource();
 			String txt1= number1.getText();
 			int num1= Integer.parseInt(txt1);
-			String txt2= number1.getText();
+			String txt2= number2.getText();
 			int num2= Integer.parseInt(txt2);
 			
 			if (buttonClicked==add) {
 				
-				add(num1, num2);
+				System.out.println(add(num1, num2));
 				
 			}
-			
+			else if(buttonClicked==subtract) {
+				System.out.println(subtract(num1,num2));
+			}
+			else if(buttonClicked== multiply) {
+				System.out.println(multiply(num1, num2));
+			}
+			else {
+			System.out.println(divide(num1, num2));
+			}
+				
 		}
 		 
 	 }
