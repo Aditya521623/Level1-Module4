@@ -1,5 +1,15 @@
 package _05_typing_tutor;
 
-public class TypingTutor {
+import javax.swing.JFrame;
 
+public class TypingTutor {
+JFrame frame= new JFrame("typing game");
+
+	
+	public void run() {
+		frame.setVisible(true);
+	}
+		
+	
+	
 }
